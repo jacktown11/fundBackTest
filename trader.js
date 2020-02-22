@@ -77,7 +77,7 @@ const DataCenter = {
     loadData: (fundInfo, cb) => {
         let funds = DataCenter.funds;
 
-        let fund = funds.find(fund => fund.id = fundInfo.id);
+        let fund = funds.find(fund => fund.id === fundInfo.id);
         if (fund) {
             cb(fund);
         } else {

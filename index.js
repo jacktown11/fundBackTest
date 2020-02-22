@@ -25,9 +25,9 @@ new Vue({
                 dir: './300yy.json',
                 isActive: false
             },{
-                id: '800xf',
-                name: '800消费',
-                dir: './800xf.json',
+                id: '300xf',
+                name: '300消费',
+                dir: './300xf.json',
                 isActive: false
             }, {
                 id: 'zzxf',
