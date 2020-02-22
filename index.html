@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中证500回测</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <h3>中证500回测</h3>
+    <div id="input">
+        每期投入（元）：<input type="number" id="investPer" placeholder="1000"><br>
+        止盈年化收益率(%)：<input type="number" id="breakRatio" placeholder="12"><br>
+        再投入分期数：<input type="number" id="reinvestNum" placeholder="36"><br>
+        <button id="cal">计算</button>
+    </diÞv>
+    <div id="result">
+        累计投入（元）：<span id="totalInvest"></span><br>
+        期末金额（元）：<span id="totalEnd"></span><br>
+        简单收益率（%）：<span id="simpleEarnRatio"></span><br>
+        年化收益率（%）：<span id="earnRatioPerYear"></span>
+    </div>
+    <script src="./index.js"></script>
+</body>
+</html>
