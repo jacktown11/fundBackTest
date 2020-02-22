@@ -1,25 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中证500回测</title>
+    <title>指数定投回测</title>
     <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-    <h3>中证500回测</h3>
-    <div id="input">
-        每期投入（元）：<input type="number" id="investPer" placeholder="1000"><br>
-        止盈年化收益率(%)：<input type="number" id="breakRatio" placeholder="12"><br>
-        再投入分期数：<input type="number" id="reinvestNum" placeholder="36"><br>
-        <button id="cal">计算</button>
-    </diÞv>
-    <div id="result">
-        累计投入（元）：<span id="totalInvest"></span><br>
-        期末金额（元）：<span id="totalEnd"></span><br>
-        简单收益率（%）：<span id="simpleEarnRatio"></span><br>
-        年化收益率（%）：<span id="earnRatioPerYear"></span>
-    </div>
-    <script src="./index.js"></script>
+    <div id="app">
+        <h2>指数定投回测</h2>
+        <div id="input">
+            <div id="param">
+                <H3>指数基础参数</H3>
+                指数：
+                <span v-for="(item, index) in funds" :class="['box', {active: item.isActive}]" v-on:click="updateFunds(index)">{{item.name}}</span>
+                <br>
+                盈利再投资期数：<input v-model="reInvestCount" type="text" id="reInvestCount"><br>
+                每月投入金额：<input v-model="inflow" type="text" id="inflow">
+            </div>
+            <div id="buy">
+                <H3>买入策略</H3>
+                <span v-for="(item, index) in buyStrategies" :class="['box', {active: item.isActive}]" v-on:click="updateBuyStrategies(index)">{{item.name}}</span>
+            </div>
+            <div id="sell">
+                <h3>卖出策略</h3>
+                <span v-for="(item, index) in sellStrategies" :class="['box', {active: item.isActive}]" v-on:click="updateSellStrategies(index)">{{item.name}}</span>
+            </div>
+            <p id="confirm" v-on:click="backTest">回测</p>
+        </div>
+        <div id="result">
+            <div class="calculating" v-if="backTestResult.length <= 0 && isCalculationg">
+                计算中...
+            </div>
+            <div v-for="result in backTestResult">
+                <table>
+                    <tr>
+                        <td colspan="6" style="color: #903;">
+                            {{result.fund.name + ' - ' + result.buyStrategy.name + ' - ' + result.sellStrategy.name}} 
+                            {{' (平均年化收益率：' + (result.average*100).toFixed(2) + '%)'}} 
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>参数</th>
+                        <th>年化收益率(%)</th>
+                        <th>简单收益率(%)</th>
+                        <th>总投入</th>
+                        <th>总收益</th>
+                        <th>止盈次数</th>
+                    </tr>
+                    <tr v-for="item in result.result">
+                        <td>{{item.param.toFixed(2)}}</td>
+                        <td>{{(item.yearIncRatio*100).toFixed(2)}}</td>
+                        <td>{{(item.simpleIncRatio*100).toFixed(2)}}</td>
+                        <td>{{item.capitalInflow.toFixed(0)}}</td>
+                        <td>{{item.capitalEnd.toFixed(0)}}</td>
+                        <td>{{item.soldTimes}}</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+        <script src="./trader.js"></script>
+        <script src="./index.js"></script>
 </body>
+
 </html>
