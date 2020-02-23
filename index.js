@@ -39,7 +39,7 @@ new Vue({
         buyStrategies: [{
             name: '宽区间估值百分位',
             id: 'VALUATION_PERCENT_WIDE',
-            isActive: true
+            isActive: false
         }, {
             name: '窄区间估值百分位',
             id: 'VALUATION_PERCENT_NARROW',
@@ -55,18 +55,18 @@ new Vue({
         }, {
             name: '定额',
             id: 'ALWAYS',
-            isActive: false
+            isActive: true
         }],
         sellStrategies: [{
             name: '年化收益率止盈',
             id: 'YEAR_INC_RATIO',
-            isActive: true,
+            isActive: false,
             paramRange: [0.05, 0.25]
         }, {
             name: '简单收益率止盈',
             id: 'SIMPLE_INC_RATIO',
-            isActive: false,
-            paramRange: [1.2, 4]
+            isActive: true,
+            paramRange: [1.1, 2]
         }],
         backTestResult: [],
         isCalculationg: false
